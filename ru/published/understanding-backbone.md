@@ -389,14 +389,14 @@ HTML-шаблонизацию. Все это в 16 строчках. Похож�
 Так будет намного легче тестировать и работать, когда наш код будет
 расти. Мы все еще далеки от пути понимания Backbone.js.
 
-Adding events
+Добавление событий
 -------------
 
-For the next step we need to introduce our first bit of Backbone:
-events. Events are basically just a way to say: "Hi, I want to know when
-some action occurs" and "Hi, you know what? The action you're waiting
-for just occurred!" We are used to this idea from jQuery DOM events such
-as listening for `click` and `submit`, e.g.
+Для следующего шага нам необходимо познакомиться с нашей первой
+частичкой Backbone: событиями. События это просто способ сказать:
+"Привет, я хочу быть в курсе того или иного действия" и "Привет, знаешь
+что? Действие которое ты ждал, произошло!" Мы привыкли к этой идее из DOM
+-событий jQuery, таких как, например слушание `click` и `submit`.
 
 ```javascript
 $('form').bind('submit', function() {
@@ -404,21 +404,23 @@ $('form').bind('submit', function() {
 });
 ```
 
-The Backbone.js documentation describes
-[`Backbone.Events`](http://backbonejs.org/#Events) as follows: *"Events
-is a module that can be mixed in to any object, giving the object the
-ability to bind and trigger custom named events."* The docs also shows
-us how we can use [Underscore.js](http://underscorejs.org/) to create an
-event dispatcher, i.e. a component on which we can bind and trigger
-events:
+Документация Backbone.js описывает
+[`Backbone.Events`](http://backbonejs.org/#Events) следующее: *"События
+это модули, которые могут быть подмешаны в любой объект, дающий ему
+право биндить и триггерить кастомно именнованные события."* Документация
+также показывает как использовать
+[Underscore.js](http://underscorejs.org/), чтобы создать диспетчер
+событий (event dispatcher), т.е. компонент на который мы можем биндить и
+треггерить события:
 
 ```javascript
 var events = _.clone(Backbone.Events);
 ```
 
-With this little bit of functionality we can let the `success` callback
-trigger an event instead of calling methods. We can also declare in the
-constructor which methods we want to call when the event is triggered:
+С этим маленьким кусочком функциональности, мы можем иннициировать
+событе на callback-функции `success`, вместо вызова метода. Мы также
+можем указать в конструкторе, какой метод мы хотим вызвать, когда
+событие проинициализируется:
 
 ```diff
 +var events = _.clone(Backbone.Events);
@@ -471,13 +473,13 @@ constructor which methods we want to call when the event is triggered:
  });
 ```
 
-Now we can declare in the constructor what we want to happen when a
-status is added, instead of `addStatus` being responsible for handling
-success. The only responsibility `addStatus` should have is backend
-communication, not updating the DOM.
+Теперь вместо функции `addStatus`, отвечающей за обработку успешного
+исхода, мы можем указать в конструкторе, что мы хотим произвести, в тот
+момент, когда добавится статус. `addStatus` должен нести ответственнгсть
+только за коммунникацию с бекендом, а не обновлять DOM.
 
-As we no longer deal with the view in the `success` callback we can move
-the triggering of the event into the `add` method on `Statuses`:
+Так как мы больше не работаем с видом в callback-функции`success`, можно
+переместить инициализацию события в метод `add` класса `Statuses`:
 
 ```diff
  var events = _.clone(Backbone.Events);
