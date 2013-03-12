@@ -534,20 +534,20 @@ var events = _.clone(Backbone.Events);
  });
 ```
 
-A view's responsibilities
--------------------------
+Ответственность представлений
+-----------------------------
 
-Looking at `appendStatus` and `clearInput` in `NewStatusView`, we see
-that these methods focus on two different DOM elements, `#statuses` and
-`#new-status`, respectively. I've given them different colors in the
-[app](http://monologue-js.herokuapp.com/), so you can see the
-difference. Working on two elements in a view does not adhere to the
-principles I outline in my blog post on
-[a view's responsibilities](https://open.bekk.no/a-views-responsibility/).
-Let's pull a `StatusesView` out of `NewStatusView`, and let it be
-responsible for `#statuses`. Separating these responsibilities is
-especially simple now that we use events — with a regular `success`
-callback this would be far more difficult.
+Глядя на `appendStatus` и `clearInput` в `NewStatusView`, мы видим, что
+эти методы сфокусированы на двух различных DOM элементах, `#statuses` и
+`#new-status`, соотвественно. В
+[приложении](http://monologue-js.herokuapp.com/) я покрасил их в разные
+цвета, так что вы можете видеть различия. Работа с двумя элементами в
+предствалении не соотвествует принципам, которые я описал в этом посте
+[отвественность представлений](https://open.bekk.no/a-views-responsibility/).
+Давайте вынесем `StatusesView` из `NewStatusView` и пусть он будет
+отвечать за `#statuses`. Разделение этих отвественностей теперь особенно
+просто - с функцией обратного вызова `success` это было бы гораздо
+сложнее.
 
 ```diff
  var events = _.clone(Backbone.Events);
@@ -659,10 +659,10 @@ them when instantiating the views:
  });
 ```
 
-Our views, `NewStatusView` and `StatusesView` are still difficult to
-test because they depend on having the HTML present, e.g. in order to
-find `$('#statuses')`. To remedy this we can pass in its DOM
-dependencies when we instantiate a view.
+Наши представления `NewStatusView` и `StatusesView` все еще сложно
+тестировать, потому что они зависят от HTML, например, что найти
+`$('#statuses')`. Для устранения этого мы можем в тот момент, когда
+создаем экземпляр представления, передать их DOM зависимости.
 
 ```diff
  var events = _.clone(Backbone.Events);
@@ -720,19 +720,21 @@ dependencies when we instantiate a view.
  });
 ```
 
-Now, this is easy to test! With this change we can use a
-[jQuery trick](http://api.jquery.com/jQuery/#jQuery2) to test our views.
-Instead of initiating our views by passing in for example
-`$('#new-status')`, we can pass in the necessary HTML wrapped in jQuery,
-e.g. `$('<div><form>…</form></div>')`. jQuery will then create the
-needed DOM elements on the fly. This ensures blazingly fast tests — on
-my current project our nearly 200 tests run in less than one second.
+Теперь это легко тестировать! С этим изменением мы можем использовать
+[jQuery trick](http://api.jquery.com/jQuery/#jQuery2) для тестирования
+представлений. Вместо того, чтобы инициализировать наши представления
+передачей например в `$('#new-status')`, мы можем перейти в нужный HTML,
+обернутый в jQuery, например `$('<div><form>…</form></div>')`. Затем
+jQuery создаст на лету необходимые DOM элементы. Это обеспечит
+невероятно быстрые тесты — в моем текущем проекте наши около 200 тестов
+исполнялись менее одной секунды.
 
-Our next step is introducing a helper to clean up our views a little
-bit. Instead of writing `this.el.find` we can create a simple helper so
-we can write `this.$` instead. With this little change it feels like we
-are saying, I want to use jQuery to look for something locally on this
-view instead of globally in the entire HTML. And it's so easy to add:
+Нашим следующим шагом будет введение хелпера, чтобы немного причесать
+наши представления. Вместо того, чтобы писать `this.el.find`, мы можем
+создать простой хелпер, позволяющий записать `this.$`. С этим маленьким
+изменением, это будет как-будто мы говорим, "Я хочу использовать jQuery
+для локального поиска чего-нибудь в этом преставлении, вместо
+глобального во всем HTML. И так легко добавить:
 
 ```diff
  var events = _.clone(Backbone.Events);
@@ -795,9 +797,9 @@ view instead of globally in the entire HTML. And it's so easy to add:
  });
 ```
 
-However, adding this functionality for every view is a pain. That's one
-of the reasons to use [Backbone.js views](http://backbonejs.org/#View) —
-reusing functionality across views.
+Тем не менее, добавление этой функциональности для каждого представления
+мучительно. Это одна из причин использовать повторную функциональность
+[представлений Backbone.js](http://backbonejs.org/#View).
 
 Getting started with views in Backbone
 --------------------------------------
