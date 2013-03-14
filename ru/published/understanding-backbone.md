@@ -801,11 +801,11 @@ jQuery создаст на лету необходимые DOM элементы.
 мучительно. Это одна из причин использовать повторную функциональность
 [представлений Backbone.js](http://backbonejs.org/#View).
 
-Getting started with views in Backbone
---------------------------------------
+Начинаем работу с представлениями в Backbone
+--------------------------------------------
 
-With the current state of our code, it's just a couple of lines of
-change needed to add Backbone.js views:
+С текущим состоянием кода, добавить представления Backbone.js дело
+нескольких сточек:
 
 ```diff
  var events = _.clone(Backbone.Events);
@@ -875,12 +875,12 @@ change needed to add Backbone.js views:
  });
 ```
 
-As you can see from the code, we use `Backbone.View.extend` to create a
-new view class in Backbone. Within `extend` we can specify instance
-methods such as `initialize`, which is the name of the constructor.
+Как вы видите, мы используем `Backbone.View.extend` для создания нового
+класса представления в Backbone. В `extend` мы можем указать инстанс
+методы, такие как `initialize`, который является именем конструктора.
 
-Now that we have started the move over to Backbone.js views, let's go on
-and move both views fully over:
+Теперь, когда мы приступили к изучанию представлений Backbone.js, пойдем
+дальше и перенесем оба представления:
 
 ```diff
  var events = _.clone(Backbone.Events);
@@ -971,10 +971,10 @@ and move both views fully over:
  });
 ```
 
-Now that we use Backbone.js views we can remove the `this.$` helper, as it
-already exists in Backbone. We also no longer need to set `this.el`
-ourselves, as Backbone.js does it automatically when a view is instantiated
-with an HTML element.
+Теперь когда мы используем представления Backbone.js, можно убрать
+`this.$` хелпер, т.к. он уже существует в Backbone. Мы также уже не
+нуждаемся в самостоятельной установке `this.el`, т.к. Backbone.js делает
+это автоматически, когда представления инстанциируется с HTML элементом.
 
 ```diff
  var events = _.clone(Backbone.Events);
