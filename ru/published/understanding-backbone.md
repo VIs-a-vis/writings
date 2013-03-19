@@ -1042,16 +1042,14 @@ jQuery создаст на лету необходимые DOM элементы.
  });
 ```
 
-Let's use a model
------------------
+Давайте использовать модели
+---------------------------
 
-The next step is introducing models, which are responsible for the
-network traffic, i.e. Ajax requests and responses. As Backbone nicely
-abstracts Ajax, we don't need to specify `type`, `dataType` and `data`
-anymore. Now we only need to specify the URL and call `save` on the
-model. The `save` method accepts the data we want to save as the first
-parameter, and options, such as the `success` callback, as the second
-parameter.
+Следующим шагом будет знакомство с моделями, отвечающих за за сетевой
+траффик, т.е. Ajax запросы и ответы. Т.к. Backbone хорошо абстрагирует
+Ajax, нам не нужно указывать больше `type`, `dataType` and `data`. Метод
+`save` принимает первым параметром данные, которые мы хотим сохранить и
+вторым опции, такие как callback-функция `success`.
 
 ```diff
  var events = _.clone(Backbone.Events);
